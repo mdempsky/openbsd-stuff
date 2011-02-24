@@ -1,0 +1,13 @@
+$OpenBSD$
+--- src/algo/numeric.cpp.orig	Wed Feb 23 11:48:36 2011
++++ src/algo/numeric.cpp	Wed Feb 23 14:32:47 2011
+@@ -29,6 +29,9 @@
+     bool isnan(double x){return false;}
+ #endif
+ 
++// using std::fabs;
++using std::isnan;
++
+ namespace ocl
+ {
+ 

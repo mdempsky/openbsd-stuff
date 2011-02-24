@@ -1,0 +1,76 @@
+$OpenBSD$
+--- src/CMakeLists.txt.orig	Wed Feb 23 11:48:38 2011
++++ src/CMakeLists.txt	Wed Feb 23 14:32:47 2011
+@@ -35,8 +35,8 @@ endif(NOT BUILD_DOC)
+ # thus we use now use -Wno-deprecated here.
+ #
+ if (CMAKE_BUILD_TOOL MATCHES "make")
+-    MESSAGE(STATUS "setting gcc options: -Wall -Werror -Wno-deprecated -pedantic-errors")
+-    add_definitions(-Wall -Werror -Wno-deprecated -pedantic-errors)
++    MESSAGE(STATUS "setting gcc options: -Wall -Wno-deprecated")
++    add_definitions(-Wall -Wno-deprecated)
+ endif (CMAKE_BUILD_TOOL MATCHES "make")
+ 
+ # find out the number of CPUs
+@@ -220,7 +220,7 @@ include_directories( ${OpenCamLib_SOURCE_DIR} )
+ if (BUILD_PY_LIB)
+     # this makes the ocl Python module
+     add_library(
+-        ocl 
++        pyocl
+         MODULE
+         ocl_cutters.cpp
+         ocl_geometry.cpp
+@@ -231,23 +231,24 @@ if (BUILD_PY_LIB)
+ endif (BUILD_PY_LIB)
+ 
+ MESSAGE(STATUS "linking ocl.so with boost: " ${Boost_LIBRARIES})
+-target_link_libraries(ocl ocl_cutters ocl_geo ocl_algo ocl_cutsim ${Boost_LIBRARIES})
+-# this makes the lib name ocl.so and not libocl.so
+-set_target_properties(ocl PROPERTIES PREFIX "") 
++target_link_libraries(pyocl ocl_cutters ocl_geo ocl_algo ocl_cutsim ${Boost_LIBRARIES})
++# this makes the lib name ocl.so and not libpyocl.so
++set_target_properties(pyocl PROPERTIES PREFIX "") 
++set_target_properties(pyocl PROPERTIES SUFFIX "") 
++set_target_properties(pyocl PROPERTIES OUTPUT_NAME "ocl.so") 
+ 
+ 
+ 
+ # this is the C++ shared library
+ if (BUILD_CXX_LIB)
+     add_library(
+-        libocl
++        ocl
+         SHARED
+         ${OCL_GEO_SRC}
+         ${OCL_CUTTER_SRC}
+         ${OCL_ALGO_SRC}
+         ${OCL_CUTSIM_SRC}
+     )
+-    set_target_properties(libocl PROPERTIES PREFIX "") 
+ endif (BUILD_CXX_LIB)
+ 
+ #
+@@ -264,7 +265,7 @@ MESSAGE(STATUS "Python libraries will be installed to:
+ if (BUILD_PY_LIB)
+     # this installs the python library
+     install(
+-        TARGETS ocl
++        TARGETS pyocl
+         LIBRARY DESTINATION ${Python_site_packages}
+     )
+ 
+@@ -280,10 +281,10 @@ endif (BUILD_PY_LIB)
+ # this installs the c++ library
+ if (BUILD_CXX_LIB)
+     install(
+-        TARGETS libocl
++        TARGETS ocl
+         LIBRARY 
+-        DESTINATION lib/opencamlib
+-        ARCHIVE DESTINATION lib/opencamlib
++        DESTINATION lib
++        ARCHIVE DESTINATION lib
+         PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+     )
+ 

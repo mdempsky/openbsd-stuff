@@ -1,0 +1,2 @@
+@comment $OpenBSD$
+@lib lib/libopencsg.so.${LIBopencsg_VERSION}

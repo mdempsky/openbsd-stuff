@@ -1,0 +1,12 @@
+$OpenBSD$
+--- src/algo/batchpushcutter.cpp.orig	Wed Feb 23 11:48:37 2011
++++ src/algo/batchpushcutter.cpp	Wed Feb 23 14:32:47 2011
+@@ -153,7 +153,7 @@ void BatchPushCutter::pushCutter3() {
+     unsigned int n; // loop variable
+     unsigned int calls=0;
+     
+-    #pragma omp parallel for schedule(dynamic) shared(calls, fiberr) private(n,i,tris,it,it_end)
++    #pragma omp parallel for schedule(dynamic) shared(calls) private(n,i,tris,it,it_end)
+     //#pragma omp parallel for shared( calls, fiberr) private(n,i,tris,it,it_end)
+     for (n=0; n<Nmax; ++n) {
+ #ifdef _OPENMP

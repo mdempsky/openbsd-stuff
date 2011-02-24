@@ -1,0 +1,13 @@
+$OpenBSD$
+--- src/cutters/ellipseposition.cpp.orig	Wed Feb 23 11:48:38 2011
++++ src/cutters/ellipseposition.cpp	Wed Feb 23 14:32:47 2011
+@@ -28,6 +28,9 @@
+ #include "ellipseposition.h"
+ #include "ellipse.h"
+ #include "numeric.h"
++
++using std::isnan;
++
+ namespace ocl
+ {
+ 

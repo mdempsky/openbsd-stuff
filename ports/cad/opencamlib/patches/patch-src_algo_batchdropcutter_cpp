@@ -1,0 +1,21 @@
+$OpenBSD$
+--- src/algo/batchdropcutter.cpp.orig	Wed Feb 23 11:48:37 2011
++++ src/algo/batchdropcutter.cpp	Wed Feb 23 14:32:47 2011
+@@ -148,7 +148,7 @@ void BatchDropCutter::dropCutter4() {
+                                    // or the user can explicitly specify something else
+ #endif
+     std::list<Triangle>::iterator it;
+-    #pragma omp parallel for shared( nloop, ntris, calls, clref) private(n,tris,it)
++    #pragma omp parallel for shared( nloop, ntris, calls) private(n,tris,it)
+         for (n=0;n< Nmax ;n++) { // PARALLEL OpenMP loop!
+ #ifdef _OPENMP
+             if ( n== 0 ) { // first iteration
+@@ -207,7 +207,7 @@ void BatchDropCutter::dropCutter5() {
+                                    // or the user can explicitly specify something else
+ #endif
+     std::list<Triangle>::iterator it;
+-    #pragma omp parallel for schedule(dynamic) shared( nloop, ntris, calls, clref ) private(n,tris,it) 
++    #pragma omp parallel for schedule(dynamic) shared( nloop, ntris, calls ) private(n,tris,it) 
+         for (n=0;n<Nmax;++n) { // PARALLEL OpenMP loop!
+ #ifdef _OPENMP
+             if ( n== 0 ) { // first iteration

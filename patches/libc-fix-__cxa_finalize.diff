@@ -1,0 +1,57 @@
+This diff fixes a bug in libc's __cxa_finalize() implementation.  The
+IA64 C++ ABI says that __cxa_finalize(NULL) should run all remaining
+handlers registered with __cxa_atexit(); however, the current handling
+of this results in a garbage argument being passed instead.
+
+E.g., this sample program should print 0x8675309:
+
+    #include <stdio.h>
+
+    extern void *__dso_handle;
+    extern void __cxa_atexit(void (*)(void *), void *, void *);
+
+    static void foo(void *arg) {
+      printf("%p\n", arg);
+    }
+
+    int main() {
+      __cxa_atexit(foo, (void *) 0x8675309, &__dso_handle);
+      return 0;
+    }
+
+
+Notes:
+
+  * This doesn't seem to affect GCC because it generates trampoline
+    code so the argument is unneeded anyway, but Clang (LLVM) makes
+    use of it causing unpredictable run-time errors when the process
+    exits.
+
+  * The atexit.[ch] code could be further simplified by always passing
+    an argument to the handler even if registered using atexit(3);
+    miod@ tells me this would be a safe operation on all of our
+    platforms.
+
+To install:
+
+  # cd /usr/src
+  # patch -p0 < path/to/libc-fix-__cxa_finalize.diff
+  # cd lib/libc && make install
+
+
+Index: lib/libc/stdlib/atexit.c
+===================================================================
+RCS file: /cvs/src/lib/libc/stdlib/atexit.c,v
+retrieving revision 1.14
+diff -u -p lib/libc/stdlib/atexit.c
+--- lib/libc/stdlib/atexit.c	5 Sep 2007 20:47:47 -0000	1.14
++++ lib/libc/stdlib/atexit.c	24 Feb 2011 04:44:53 -0000
+@@ -147,7 +147,7 @@ __cxa_finalize(void *dso)
+ 				p->fns[n].fn_ptr.cxa_func = NULL;
+ 				mprotect(p, pgsize, PROT_READ);
+ 			}
+-			if (dso != NULL)
++			if (fn.fn_dso != NULL)
+ 				(*fn.fn_ptr.cxa_func)(fn.fn_arg);
+ 			else
+ 				(*fn.fn_ptr.std_func)();

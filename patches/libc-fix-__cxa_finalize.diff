@@ -36,7 +36,7 @@ To install:
 
   # cd /usr/src
   # patch -p0 < path/to/libc-fix-__cxa_finalize.diff
-  # cd lib/libc && make install
+  # ( cd lib/libc && make install )
 
 
 Index: lib/libc/stdlib/atexit.c

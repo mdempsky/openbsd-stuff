@@ -18,8 +18,8 @@ To apply:
 
   # cd /usr/src
   # patch -p0 < path/to/libm-fenv.diff
-  # cd include && make includes
-  # cd lib/libm && make install
+  # ( cd include && make includes )
+  # ( cd lib/libm && make install )
 
  include/Makefile                |    4 
  include/fenv.h                  |   62 ++++

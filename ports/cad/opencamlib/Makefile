@@ -19,8 +19,6 @@ PERMIT_DISTFILES_FTP =	Yes
 
 WANTLIB =		boost_python-mt gomp m pthread stdc++
 
-# XXX; svn only
-
 WRKSRC =		${WRKDIST}/src
 
 CONFIGURE_ARGS =	-DBUILD_CXX_LIB=ON \
@@ -33,5 +31,12 @@ LIB_DEPENDS =		devel/boost
 pre-configure:
 	ln -sf ${LOCALBASE}/bin/python2.6 ${WRKDIR}/bin/python
 	ln -sf ${LOCALBASE}/bin/python2.6-config ${WRKDIR}/bin/python-config
+
+# XXX: Silly workaround for lack of proper upstream releases.
+makedistfile:
+	svn co -r${V} http://opencamlib.googlecode.com/svn/trunk/ opencamlib-${V}
+	find opencamlib-${V} -name .svn -prune -or -type f -print0 \
+	| xargs -0 tar -czvf ${DISTDIR}/opencamlib-${V}.tar.gz
+	@${_MAKE} makesum
 
 .include <bsd.port.mk>

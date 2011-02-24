@@ -1,0 +1,85 @@
+This is a *SUPER* hacky diff to enable libgomp (i.e., OpenMP support)
+in base.  It's amd64 specific and still nearly completely untested.
+
+
+To install:
+
+  # cd /usr/src
+  # patch -p0 < path/to/libgomp.diff
+  # ( cd gnu/lib/libgomp && make includes && make depend && make && make install )
+
+
+--- /dev/null	Wed Feb 23 21:37:31 2011
++++ gnu/lib/libgomp/Makefile	Wed Feb 23 21:37:14 2011
+@@ -0,0 +1,66 @@
++# $OpenBSD$
++
++GOMPDIR=${.CURDIR}/../../gcc/libgomp
++GCCDIR=	${.CURDIR}/../../gcc/gcc
++GCCLIB=	${.CURDIR}/../../gcc
++
++.PATH: ${GOMPDIR} ${GOMPDIR}/config/posix
++
++LIB=	gomp
++
++SRCS=	alloc.c barrier.c critical.c env.c error.c fortran.c iter.c loop.c ordered.c \
++	parallel.c sections.c single.c team.c work.c
++SRCS+=	bar.c lock.c mutex.c proc.c sem.c time.c
++
++INCS=	omp.h
++
++CFLAGS+= -DHAVE_GTHR_DEFAULT -DIN_GCC -DIN_TARGET_LIBS
++CFLAGS+= -I. -I${.CURDIR}/../../usr.bin/cc/cc_tools
++CFLAGS+= -I${GOMPDIR} -I${GOMPDIR}/config/posix
++CFLAGS+= -I${GCCDIR}/config -I${GCCDIR}
++CFLAGS+= -I${GCCLIB}/include
++CFLAGS+= -fexceptions -frandom-seed=RepeatabilityConsideredGood
++
++# XXX: Lame.
++.for H in omp.h libgomp_f.h
++$H: $H.in
++	sed -e "s/@OMP_LOCK_SIZE@/8/g" \
++	    -e "s/@OMP_LOCK_ALIGN@/8/g" \
++	    -e "s/@OMP_NEST_LOCK_SIZE@/16/g" \
++	    -e "s/@OMP_NEST_LOCK_ALIGN@/8/g" \
++	    -e "s/@OMP_LOCK_KIND@/8/g" \
++	    -e "s/@OMP_NEST_LOCK_KIND@/8/g" \
++	< ${.ALLSRC} > ${.TARGET}
++GENHDRS+=	$H
++.endfor
++
++libgomp.spec: libgomp.spec.in
++	sed -e "s/@link_gomp@/-lgomp -lpthread/g" < ${.ALLSRC} > ${.TARGET}
++
++all: libgomp.spec
++
++.for H in tconfig.h tm.h config.h options.h gthr-default.h unwind.h gstdint.h
++$H: ${.CURDIR}/../../usr.bin/cc/cc_tools/Makefile
++	${MAKE} -f ${.ALLSRC} MFILE=${.ALLSRC} GCCDIR=${GCCDIR} ${.TARGET}
++GENHDRS+=	$H
++.endfor
++
++CLEANFILES+=	${GENHDRS}
++SRCS+=		${GENHDRS}
++
++.if !empty(INCS)
++includes: ${INCS}
++	${INSTALL} -C -o ${BINOWN} -g ${LOCALEGRP} -m ${NONBINMODE} ${.ALLSRC} \
++		${DESTDIR}/usr/include
++.endif
++
++# XXX
++SPECDIR= /usr/lib/gcc-lib/amd64-unknown-openbsd4.9/4.2.1
++
++afterinstall: libgomp.spec
++	${INSTALL} -c -o ${BINOWN} -g ${BINGRP} -m ${NONBINMODE} libgomp.spec \
++		${DESTDIR}${SPECDIR}
++
++${OBJS}: ${GENHDRS}
++
++.include <bsd.lib.mk>
+--- /dev/null	Wed Feb 23 21:37:31 2011
++++ gnu/lib/libgomp/shlib_version	Wed Feb 23 10:13:32 2011
+@@ -0,0 +1,2 @@
++major=0
++minor=0

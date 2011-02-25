@@ -1,0 +1,14 @@
+$OpenBSD$
+--- ros/inc/Xw_Extension.h.orig	Fri Jul  4 08:39:15 2008
++++ ros/inc/Xw_Extension.h	Thu Feb 24 19:46:28 2011
+@@ -22,10 +22,6 @@
+ #define min(a,b) 	(a>b ? b : a)
+ #endif
+ 
+-#ifdef HAVE_CONFIG_H
+-# include <config.h>
+-#endif
+-
+ #ifdef HAVE_X11_EXTENSIONS_TRANSOLV_H
+ #include <X11/extensions/transovl.h>
+ #endif

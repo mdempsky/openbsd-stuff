@@ -1,0 +1,52 @@
+$OpenBSD$
+--- ros/configure.in.orig	Tue Sep  9 08:49:10 2008
++++ ros/configure.in	Fri Feb 25 12:01:07 2011
+@@ -127,8 +127,8 @@ AC_CACHE_CHECK(if it is OK to define stream input and 
+ def_ios_ok,
+ [AC_LANG([C++])
+  AC_TRY_COMPILE([#include <stream.h>
+-static const int input = (ios::in) | (ios::nocreate);
+-static const int output= (ios::out);],
++static const int input = (std::ios::in) | (std::ios::nocreate);
++static const int output= (std::ios::out);],
+ [return 0;],
+  def_ios_ok=yes, def_ios_ok=no)
+ ])
+@@ -141,7 +141,7 @@ AC_CACHE_CHECK([if class ostream has member function f
+ ostream_form_ok,
+ [AC_LANG([C++])
+  AC_TRY_COMPILE([#include <iostream.h>],
+-[cout << cout.form("%9.3e", 3.14159627e-4) << endl;
++[std::cout << std::cout.form("%9.3e", 3.14159627e-4) << std::endl;
+ return 0;],
+  ostream_form_ok=yes, ostream_form_ok=no)
+ ])
+@@ -362,7 +362,7 @@ AC_LANG([C])
+   fi
+   CPPFLAGS="$CSF_OpenGlLibs_INCLUDES $CPPFLAGS"
+   HAVE_GL_LIB=yes
+-  AC_CHECK_LIB( [GL], [glClear], [AC_CHECK_LIB([GLU],[gluSphere],[CSF_OpenGlLibs_LIB="$CSF_OpenGlLibs_LIB -lGLU -lGL"],[HAVE_GL_LIB=no],[-lGL])], [HAVE_GL_LIB=no] )
++  AC_CHECK_LIB( [GL], [glClear], [AC_CHECK_LIB([GLU],[gluSphere],[CSF_OpenGlLibs_LIB="$CSF_OpenGlLibs_LIB -lGLU -lGL -lm"],[HAVE_GL_LIB=no],[-lGL -lm])], [HAVE_GL_LIB=no] )
+   if test "xno" = "x$HAVE_GL_LIB"; then
+     HAVE_GL=no
+     AC_MSG_NOTICE("Specify LDFLAGS=-L<opengl_lib_dir> to enable OpenGL support")
+@@ -409,10 +409,12 @@ LIBS="$LIBS_save"
+ #  
+ #---------------------------------------------------------------------
+ AC_MSG_CHECKING([if platform is 64-bit])
++OCC_define_OCC64="#undef _OCC64"
+ AC_TRY_COMPILE( [], 
+  [int array[((int)sizeof(void*))-6];],
+- [AC_MSG_RESULT([yes]); CPPFLAGS="$CPPFLAGS -D_OCC64"; case $platform in Linux*) CPPFLAGS="$CPPFLAGS -m64";; esac],
++ [AC_MSG_RESULT([yes]); OCC_define_OCC64="#define _OCC64 1"],
+  [AC_MSG_RESULT([no])] )
++AC_SUBST(OCC_define_OCC64)
+ 
+ AC_ARG_ENABLE([debug],
+               [AC_HELP_STRING([--enable-debug],[Debug Symbols])],
+@@ -761,4 +763,5 @@ adm/make/TKCSFDBSchema/Makefile \
+ adm/make/WOKSH/Makefile \
+ adm/make/WOKLibs/Makefile \
+ adm/make/TKjcas/Makefile \
++inc/arch-6.3.0/Standard_Macro64.hxx \
+ ])

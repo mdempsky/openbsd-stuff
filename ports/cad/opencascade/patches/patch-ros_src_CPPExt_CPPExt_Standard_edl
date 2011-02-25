@@ -1,0 +1,12 @@
+$OpenBSD$
+--- ros/src/CPPExt/CPPExt_Standard.edl.orig	Fri Aug 25 10:01:22 2006
++++ ros/src/CPPExt/CPPExt_Standard.edl	Thu Feb 24 19:46:28 2011
+@@ -18,7 +18,7 @@ $#include <Standard_Transient_proto.hxx>
+ $#endif
+ $
+ $#ifndef UndefinedHandleAddress 
+-$#ifdef DECOSF1
++$#ifdef _OCC64
+ $#define UndefinedHandleAddress ((Standard_Transient *)0xfefdfefdfefd0000)
+ $#else
+ $#define UndefinedHandleAddress ((Standard_Transient *)0xfefd0000)

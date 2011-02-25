@@ -1,0 +1,21 @@
+$OpenBSD$
+--- ros/inc/Standard_values.h.orig	Thu Apr 21 07:32:46 2005
++++ ros/inc/Standard_values.h	Fri Feb 25 00:03:40 2011
+@@ -23,17 +23,7 @@ Facility : CAS-CADE V1.3A
+ #endif
+ 
+ #ifndef WNT
+-#ifdef HAVE_CONFIG_H
+-# include <config.h>
+-#endif
+-
+-#ifdef HAVE_LIMITS
+-# include <limits>
+-#elif defined (HAVE_LIMITS_H)
+ # include <limits.h>
+-#else
+-#error "check config.h file or compilation options: either HAVE_LIMITS or HAVE_LIMITS_H should be defined"
+-#endif
+ #endif
+ 
+ 

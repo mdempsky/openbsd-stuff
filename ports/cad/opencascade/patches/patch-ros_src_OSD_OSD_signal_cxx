@@ -1,0 +1,11 @@
+$OpenBSD$
+--- ros/src/OSD/OSD_signal.cxx.orig	Fri Jul 18 07:59:41 2008
++++ ros/src/OSD/OSD_signal.cxx	Thu Feb 24 19:46:28 2011
+@@ -24,6 +24,7 @@
+ #include <Standard_NullObject.hxx>
+ #include <Standard_DivideByZero.hxx>
+ #include <Standard_Overflow.hxx>
++#include <Standard_Macro.hxx>
+ 
+ #include <Standard_ErrorHandler.hxx>
+ 

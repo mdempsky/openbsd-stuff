@@ -1,0 +1,16 @@
+$OpenBSD$
+--- ros/inc/arch-6.3.0/Standard_Macro64.hxx.in.orig	Thu Feb 24 19:46:28 2011
++++ ros/inc/arch-6.3.0/Standard_Macro64.hxx.in	Thu Feb 24 19:46:28 2011
+@@ -0,0 +1,12 @@
++#ifndef _Standard_Macro64_HeaderFile
++# define _Standard_Macro64_HeaderFile
++
++// This file must not be included directly because its name may change.
++#ifndef _Standard_Macro_HeaderFile
++# error "Standard_Macro64.hxx must not be included directly, include Standard_Macro.hxx instead!"
++#endif
++
++// Define _OCC64 variable on 64-bit platforms
++@OCC_define_OCC64@
++
++#endif  

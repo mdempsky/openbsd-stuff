@@ -1,0 +1,14 @@
+$OpenBSD$
+--- ros/inc/Standard_Macro.hxx.orig	Thu Feb 24 19:46:28 2011
++++ ros/inc/Standard_Macro.hxx	Thu Feb 24 19:46:28 2011
+@@ -7,10 +7,6 @@
+ #ifndef _Standard_Macro_HeaderFile
+ # define _Standard_Macro_HeaderFile
+ 
+-#ifdef HAVE_CONFIG_H
+-# include <config.h>
+-#endif /* HAVE_CONFIG_H */
+-
+ // Standard OCC macros: Handle(), STANDARD_TYPE()
+ # define   Handle(ClassName)  Handle_##ClassName
+ # define   STANDARD_TYPE(aType)   aType##_Type_()

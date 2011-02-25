@@ -1,0 +1,46 @@
+$OpenBSD$
+--- ros/src/Standard/Standard_Atomic.hxx.orig	Tue Oct  9 07:04:47 2007
++++ ros/src/Standard/Standard_Atomic.hxx	Thu Feb 24 19:46:28 2011
+@@ -51,35 +51,24 @@ inline int Standard_Atomic_DecrementTest (int volatile
+ //       however these definitions involve specific type atomic_t
+ // Note: The same code probably would work for Intel compiler
+ //===================================================
+-#elif defined(LIN)
++#elif defined(__GNUG__)
+ 
+-inline void Standard_Atomic_Increment (int volatile* var)
++#include <ext/atomicity.h>
++
++inline void Standard_Atomic_Increment (int* var)
+ {
+   // C equivalent:
+   // ++(*var);
+ 
+-  __asm__ __volatile__
+-  (
+-    "lock incl %0"
+-  : "=m"(*var) // out
+-  : "m" (*var) // in 
+-  );
++  __gnu_cxx::__atomic_add_dispatch(static_cast<_Atomic_word*>(var), 1);
+ }
+ 
+-inline int Standard_Atomic_DecrementTest (int volatile* var)
++inline int Standard_Atomic_DecrementTest (int* var)
+ {
+   // C equivalent:
+   // return --(*var) == 0;
+ 
+-  unsigned char c;
+-  __asm__ __volatile__
+-  (
+-    "lock decl %0; sete %1"
+-  : "=m"(*var), "=qm"(c) // out
+-  : "m" (*var)           // in
+-  : "memory"
+-  );
+-  return c != 0;
++  return __gnu_cxx::__exchange_and_add_dispatch(static_cast<_Atomic_word*>(var),-1) == 1;
+ }
+ 
+ //===================================================

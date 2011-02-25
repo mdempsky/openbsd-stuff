@@ -1,0 +1,30 @@
+$OpenBSD$
+--- ros/inc/Standard_Stream.hxx.orig	Tue Oct  9 07:04:46 2007
++++ ros/inc/Standard_Stream.hxx	Fri Feb 25 00:03:40 2011
+@@ -24,26 +24,12 @@
+ // Unix variant
+ #ifndef WNT
+ 
+-#ifdef HAVE_IOSTREAM
+   #include <iostream>
+   #define USE_STL_STREAM
+-#elif defined (HAVE_IOSTREAM_H)
+-  #include <iostream.h>
+-#else
+-  #error "check config.h file or compilation options: either HAVE_IOSTREAM or HAVE_IOSTREAM_H should be defined"
+-#endif
+ 
+-#ifdef HAVE_IOMANIP
+   #include <iomanip>
+-#elif defined (HAVE_IOMANIP_H)
+-  #include <iomanip.h>
+-#endif
+ 
+-#ifdef HAVE_FSTREAM
+   #include <fstream>
+-#elif defined (HAVE_FSTREAM_H)
+-  #include <fstream.h>
+-#endif
+ 
+ // Windows variant
+ #else /* WNT */

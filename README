@@ -1,2 +1,10 @@
 This repository is a random collection of OpenBSD related stuff (e.g.,
 uncommitted diffs and new ports).
+
+Be warned that any files found herein are very much a work-in-progress
+and have received very minimal testing.  In some cases, I've done the
+bare minimum to get things to compile even (and only on machines I
+have easy access to).
+
+That said, I'd like to see this code eventually get committed to CVS,
+so any help cleaning things up would be greatly appreciated.

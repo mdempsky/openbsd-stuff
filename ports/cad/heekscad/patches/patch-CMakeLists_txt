@@ -1,0 +1,23 @@
+$OpenBSD$
+--- CMakeLists.txt.orig	Fri Feb 25 14:12:53 2011
++++ CMakeLists.txt	Fri Feb 25 15:05:38 2011
+@@ -9,6 +9,10 @@ set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_S
+ set( BUILD_STARTED_IN_RIGHT_DIR "true" )  #used in src/CMakeLists.txt to print a message
+ 
+ add_definitions ( -Wall )
++
++# http://www.mail-archive.com/cmake@cmake.org/msg13265.html
++SET(wxWidgets_INCLUDE_DIRS_NO_SYSTEM 1)
++
+ FIND_PACKAGE( wxWidgets REQUIRED COMPONENTS base core gl )
+ find_package ( OpenCASCADE REQUIRED COMPONENTS TKernel )
+ 
+@@ -17,6 +21,8 @@ if( APPLE )
+   set( OSX_INCLUDE_DIRS /usr/X11R6/include )
+   set( OSX_LIBS -L/usr/X11R6/lib -lGL -lX11 -lGLU -lglut )
+ endif( APPLE )
++# Stupid.
++set(OSX_LIBS -lutil)
+ 
+ INCLUDE(${wxWidgets_USE_FILE})
+ include_directories (

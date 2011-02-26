@@ -1,10 +1,13 @@
-# XXX: libraries aren't being properly handled by cmake.
+# XXX: Make HeeksCNC into a subpackage or maybe split into a separate port?
 
 COMMENT =		HeeksCAD
 
 V =			1432
+CNC.V =			1306
 DISTNAME =		HeeksCAD-${V}
 PKGNAME =		heekscad-${V}
+
+DISTFILES =		HeeksCAD-${V}.tar.gz HeeksCNC-${CNC.V}.tar.gz
 
 SHARED_LIBS =		heeksintf 0.0 \
 			sketchsolve 0.0 \
@@ -38,6 +41,37 @@ CONFIGURE_ENV =         CFLAGS="${CFLAGS} -I${X11BASE}/include" \
 
 MODULES =		devel/cmake lang/python
 LIB_DEPENDS =		cad/opencascade x11/wxWidgets devel/boost x11/gtkglext
+
+post-extract:
+	@mv ${WRKDIR}/HeeksCNC-${CNC.V} ${WRKDIST}/HeeksCNC
+
+# Copied from cmake.port.mk and tweaked:
+do-configure:
+	@cd ${WRKBUILD} && ${_SYSTRACE_CMD} ${SETENV} \
+		CC="${CC}" CFLAGS="${CFLAGS}" \
+		CXX="${CXX}" CXXFLAGS="${CXXFLAGS}" \
+		${CONFIGURE_ENV} ${LOCALBASE}/bin/cmake ${CONFIGURE_ARGS} ${WRKSRC}
+	@cd ${WRKBUILD}/HeeksCNC && ${_SYSTRACE_CMD} ${SETENV} \
+		CC="${CC}" CFLAGS="${CFLAGS}" \
+		CXX="${CXX}" CXXFLAGS="${CXXFLAGS}" \
+		${CONFIGURE_ENV} ${LOCALBASE}/bin/cmake ${CONFIGURE_ARGS} ${WRKSRC}/HeeksCNC
+
+# Copied from bsd.port.mk and tweaked:
+do-build:
+	@cd ${WRKBUILD} && exec ${_SYSTRACE_CMD} ${SETENV} ${MAKE_ENV} \
+		${MAKE_PROGRAM} ${MAKE_FLAGS} -f ${MAKE_FILE} ${ALL_TARGET}
+	@cd ${WRKBUILD}/HeeksCNC && exec ${_SYSTRACE_CMD} ${SETENV} ${MAKE_ENV} \
+		${MAKE_PROGRAM} ${MAKE_FLAGS} -f ${MAKE_FILE} ${ALL_TARGET}
+
+# Copied from bsd.port.mk and tweaked:
+do-install:
+	@cd ${WRKBUILD} && exec ${SUDO} ${_SYSTRACE_CMD} \
+		${SETENV} ${MAKE_ENV} ${_FAKE_SETUP} \
+		${MAKE_PROGRAM} ${ALL_FAKE_FLAGS} -f ${MAKE_FILE} ${FAKE_TARGET}
+	@cd ${WRKBUILD}/HeeksCNC && exec ${SUDO} ${_SYSTRACE_CMD} \
+		${SETENV} ${MAKE_ENV} ${_FAKE_SETUP} \
+		${MAKE_PROGRAM} ${ALL_FAKE_FLAGS} -f ${MAKE_FILE} ${FAKE_TARGET}
+
 
 
 # Copied from www/chromium, because warnings about #pragma push.

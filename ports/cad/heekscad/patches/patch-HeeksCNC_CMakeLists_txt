@@ -1,0 +1,20 @@
+$OpenBSD$
+--- HeeksCNC/CMakeLists.txt.orig	Fri Feb 25 16:20:20 2011
++++ HeeksCNC/CMakeLists.txt	Fri Feb 25 16:21:01 2011
+@@ -10,12 +10,16 @@ set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_S
+ set( BUILD_STARTED_IN_RIGHT_DIR "true" )  #used in src/CMakeLists.txt to print a message
+ 
+ add_definitions ( -Wall )
++
++SET(wxWidgets_INCLUDE_DIRS_NO_SYSTEM 1)
++
+ find_package( wxWidgets REQUIRED COMPONENTS base core gl )
+ find_package ( OpenCASCADE REQUIRED COMPONENTS TKernel )
+ find_package( PythonInterp REQUIRED )
+ 
+ include(${wxWidgets_USE_FILE})
+ include_directories (
++	/usr/X11R6/include
+ 	${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+ 	${wxWidgets_INCLUDE_DIRS}
+ 	${OpenCASCADE_INCLUDE_DIR}

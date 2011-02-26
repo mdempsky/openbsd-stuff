@@ -1,0 +1,20 @@
+$OpenBSD$
+--- HeeksCNC/cmake/Modules/FindOpenCASCADE.cmake.orig	Fri Feb 25 15:56:32 2011
++++ HeeksCNC/cmake/Modules/FindOpenCASCADE.cmake	Fri Feb 25 16:20:01 2011
+@@ -12,13 +12,13 @@
+ # ${OpenCASCADE_FOUND} is cached, so once OCC is found this block shouldn't have to run again
+ IF( NOT OpenCASCADE_FOUND STREQUAL TRUE )
+   IF(UNIX)
+-    set( _incsearchpath /usr/include/opencascade /opt/occ/inc $ENV{CASROOT}/inc )
++    set( _incsearchpath /usr/include/opencascade /usr/local/include/opencascade /opt/occ/inc $ENV{CASROOT}/inc )
+     IF (APPLE)
+       set( _testlibname libTKernel.dylib )
+     ELSE (APPLE)
+-      set( _testlibname libTKernel.so )
++      set( _testlibname libTKernel.so.0.0 )
+     ENDIF (APPLE)
+-    set( _libsearchpath /usr/lib /opt/occ/lib $ENV{CASROOT}/lib )
++    set( _libsearchpath /usr/lib /usr/local/lib /opt/occ/lib $ENV{CASROOT}/lib )
+   ELSE(UNIX)
+     IF (WIN32)
+       MESSAGE("************ FindOpenCASCADE.cmake has not been tried on windows and may or may not work! *************")

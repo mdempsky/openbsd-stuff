@@ -1,0 +1,2 @@
+@comment $OpenBSD$
+lib/python${MODPY_VERSION}/site-packages/actp.so

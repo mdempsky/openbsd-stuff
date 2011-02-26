@@ -1,0 +1,4 @@
+The libactp (Adaptive Clearing Tool Path Library) is an implementation
+of the GPL'ed algorithm demonstrated in FreeSteel as a set of C
+library functions. This library can then be wrapped for use in other
+languages such as Python or Perl. 

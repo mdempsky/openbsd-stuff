@@ -1,0 +1,15 @@
+$OpenBSD$
+--- Makefile.orig	Fri Feb 25 17:08:04 2011
++++ Makefile	Fri Feb 25 17:09:53 2011
+@@ -5,9 +5,9 @@ HOME	= .
+ CXX     = g++
+ CC      = gcc
+ LD      = g++
+-LDFLAGS = -shared -rdynamic `python-config --ldflags` -lboost_python
++LDFLAGS = -shared -rdynamic -L/usr/local/lib `python-config --ldflags` -lboost_python
+ LIBS    = -lstdc++ `python-config --libs`
+-CFLAGS  = -Wall -I/usr/include `python-config --includes` -I./ -I./kbool/include -g -fPIC
++CFLAGS  = -Wall -I/usr/include -I/usr/local/include `python-config --includes` -I./ -I./kbool/include -g -fPIC
+ 
+ LIBNAME	= area
+ LIBOBJS	= Arc.o Area.o AreaBoolean.o AreaDxf.o AreaOrderer.o AreaPocket.o booleng.o Circle.o Construction.o Curve.o dxf.o Finite.o graph.o graphlst.o instonly.o kurve.o line.o link.o lpoint.o Matrix.o node.o offset.o PythonStuff.o record.o scanbeam.o

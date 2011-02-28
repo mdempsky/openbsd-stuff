@@ -14,6 +14,9 @@ Notes:
     library version number.  Be advised that any code (e.g., ports)
     compiled using it will not work on an unpatched OpenBSD system.
 
+  * The i386 version is almost certainly broken on machines supporting
+    SSE.  (See the __test_sse function.)
+
 To apply:
 
   # cd /usr/src
@@ -1099,7 +1102,7 @@ diff -u -p lib/libm/Makefile
 + */
 +fenv_t __fe_dfl_env = {
 +	{
-+		__NetBSD_NPXCW__,       /* Control word register */
++		__INITIAL_NPXCW__,      /* Control word register */
 +		0x0,			/* Unused */
 +		0x0000,                 /* Status word register */
 +		0x0,			/* Unused */

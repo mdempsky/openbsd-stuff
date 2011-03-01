@@ -8,7 +8,9 @@ SHARED_LIBS =		opencsg		0.0
 
 CATEGORIES =		graphics
 
-# GPLv2; see http://www.opencsg.org/#license
+HOMEPAGE =		http://www.opencsg.org/
+
+# GPLv2 with CGAL exception
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes

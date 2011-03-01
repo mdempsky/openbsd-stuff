@@ -1,24 +1,22 @@
+# $OpenBSD$
+
 COMMENT =		libarea
 
 V = 			83
 DISTNAME =		libarea-${V}
 
-# for any port that creates shared libraries.
-# both libtool and cmake handle this automatically.
-# for libtool-based ports, have a look at WRKBUILD/shared_libs.log
-#SHARED_LIBS =		???
-
-# the category used in the directory name, /usr/ports/<category>/portname,
-# must be included and listed first.
 CATEGORIES =		cad
 
-# GPL?
+HOMEPAGE =		http://code.google.com/p/libactp/
+
+# mix of GPLv3, 3-clause BSD, and Boost (MIT-like)
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB = boost_python m python2.6 stdc++ util
+WANTLIB =		boost_python m stdc++ util
+WANTLIB +=		${MODPY_WANTLIB}
 
 USE_GMAKE =		Yes
 

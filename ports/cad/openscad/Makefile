@@ -8,7 +8,9 @@ DISTNAME =		openscad-${V}
 
 CATEGORIES =		cad
 
-# GPLv2 with CGAL exception; see http://www.openscad.org/#download
+HOMEPAGE =		http://www.openscad.org/
+
+# GPLv2+ with CGAL exception
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes

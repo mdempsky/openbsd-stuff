@@ -14,6 +14,8 @@ SHARED_LIBS =		CGAL		0.0 \
 
 CATEGORIES =		math
 
+HOMEPAGE =		http://www.cgal.org/
+
 # mix of LGPLv2.1 and QPL; see http://www.cgal.org/license.html
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes

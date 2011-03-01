@@ -1,24 +1,22 @@
+# $OpenBSD$
+
 COMMENT =		libactp
 
 V = 			44
 DISTNAME =		libactp-${V}
 
-# for any port that creates shared libraries.
-# both libtool and cmake handle this automatically.
-# for libtool-based ports, have a look at WRKBUILD/shared_libs.log
-#SHARED_LIBS =		???
-
-# the category used in the directory name, /usr/ports/<category>/portname,
-# must be included and listed first.
 CATEGORIES =		cad
 
-# GPL?
+HOMEPAGE =		http://code.google.com/p/libactp/
+
+# mix of GPLv2+ and GPLv3
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB += m python2.6 stdc++ util
+WANTLIB =		m stdc++ util
+WANTLIB +=		${MODPY_WANTLIB}
 
 WRKSRC =		${WRKDIST}/PythonLib
 

@@ -29,8 +29,8 @@ MODULES =		devel/cmake \
 LIB_DEPENDS =		devel/boost
 
 pre-configure:
-	ln -sf ${LOCALBASE}/bin/python2.6 ${WRKDIR}/bin/python
-	ln -sf ${LOCALBASE}/bin/python2.6-config ${WRKDIR}/bin/python-config
+	ln -sf ${MODPY_BIN} ${WRKDIR}/bin/python
+	ln -sf ${MODPY_BIN}-config ${WRKDIR}/bin/python-config
 
 # XXX: Silly workaround for lack of proper upstream releases.
 makedistfile:

@@ -1,0 +1,71 @@
+This diff changes stdarg.h's va_arg and va_end macros to be
+consistently defined as function-like macros rather than object-like
+macros.
+
+The C standard does not explicitly require va_arg and va_end to be
+function-like macros, but some of the wording appears to implicitly
+require it.  E.g., section 7.15.1.1.2 says:
+
+    The va_arg macro expands to an expression that has the specified
+    type and the value of the next argument in the call.
+
+Strictly speaking, if va_arg is an object-like macro, its expansion
+will not be an expression of the specified type (or any type, as
+__built_va_arg is simply a reserved keyword in GCC and is not
+considered by itself an expression).
+
+
+Index: sys/arch/arm/include/stdarg.h
+===================================================================
+RCS file: /cvs/src/sys/arch/arm/include/stdarg.h,v
+retrieving revision 1.7
+diff -u -p sys/arch/arm/include/stdarg.h
+--- sys/arch/arm/include/stdarg.h	23 Oct 2008 21:25:07 -0000	1.7
++++ sys/arch/arm/include/stdarg.h	1 Mar 2011 00:29:48 -0000
+@@ -49,8 +49,8 @@ typedef __va_list	va_list;
+ 
+ #define	va_start(ap, last)	__builtin_stdarg_start((ap), (last))
+ 
+-#define	va_arg			__builtin_va_arg
+-#define	va_end			__builtin_va_end
++#define	va_arg(ap, type)	__builtin_va_arg((ap), type)
++#define	va_end(ap)		__builtin_va_end((ap))
+ #define	__va_copy(dest, src)	__builtin_va_copy((dest), (src))
+ 
+ #endif /* !_ARM32_STDARG_H_ */
+Index: sys/arch/sh/include/stdarg.h
+===================================================================
+RCS file: /cvs/src/sys/arch/sh/include/stdarg.h,v
+retrieving revision 1.2
+diff -u -p sys/arch/sh/include/stdarg.h
+--- sys/arch/sh/include/stdarg.h	23 Oct 2008 21:25:07 -0000	1.2
++++ sys/arch/sh/include/stdarg.h	1 Mar 2011 00:29:48 -0000
+@@ -49,8 +49,8 @@ typedef __va_list	va_list;
+ #endif
+ 
+ #define	va_start(ap, last)	__builtin_stdarg_start((ap), (last))
+-#define	va_arg			__builtin_va_arg
+-#define	va_end			__builtin_va_end
++#define	va_arg(ap, type)	__builtin_va_arg((ap), type)
++#define	va_end(ap)		__builtin_va_end((ap))
+ #define	__va_copy(dest, src)	__builtin_va_copy((dest), (src))
+ 
+ #endif /* !_SH_STDARG_H_ */
+Index: sys/sys/stdarg.h
+===================================================================
+RCS file: /cvs/src/sys/sys/stdarg.h,v
+retrieving revision 1.7
+diff -u -p sys/sys/stdarg.h
+--- sys/sys/stdarg.h	17 Sep 2009 20:46:55 -0000	1.7
++++ sys/sys/stdarg.h	1 Mar 2011 00:29:48 -0000
+@@ -34,8 +34,8 @@ typedef __builtin_va_list __gnuc_va_list;
+    Thus, va_arg (..., short) is not valid.  */
+ 
+ #define va_start(ap, last)	__builtin_va_start((ap), last)
+-#define va_end			__builtin_va_end
+-#define va_arg			__builtin_va_arg
++#define va_end(ap)		__builtin_va_end((ap))
++#define va_arg(ap, type)	__builtin_va_arg((ap), type)
+ #define __va_copy(dst, src)	__builtin_va_copy((dst),(src))
+ 
+ typedef __gnuc_va_list va_list;

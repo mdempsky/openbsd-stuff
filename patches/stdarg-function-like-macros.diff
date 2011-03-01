@@ -15,6 +15,10 @@ __built_va_arg is simply a reserved keyword in GCC and is not
 considered by itself an expression).
 
 
+This diff allows (questionable, but technically legal) code that uses
+va_arg as a local variable name to compile.
+
+
 Index: sys/arch/arm/include/stdarg.h
 ===================================================================
 RCS file: /cvs/src/sys/arch/arm/include/stdarg.h,v

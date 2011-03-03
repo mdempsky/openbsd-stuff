@@ -76,15 +76,4 @@ do-install:
 		${MAKE_PROGRAM} ${ALL_FAKE_FLAGS} -f ${MAKE_FILE} ${FAKE_TARGET}
 
 
-
-# Copied from www/chromium, because warnings about #pragma push; shouldn't
-# be necessary once base gcc is fixed.
-MODULES+=       gcc4
-MODGCC4_LANGS = c c++
-MODGCC4_ARCHES = i386 amd64
-# XXX cheat
-COMPILER_VERSION = gcc3
-
-
-
 .include <bsd.port.mk>

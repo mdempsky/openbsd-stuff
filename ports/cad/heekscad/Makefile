@@ -37,8 +37,7 @@ WANTLIB += ${MODPY_WANTLIB}
 
 CONFIGURE_ENV =         CFLAGS="${CFLAGS} -I${X11BASE}/include" \
                         CXXFLAGS="${CXXFLAGS} -I${X11BASE}/include" \
-                        LDFLAGS="${LDFLAGS} -L${X11BASE}/lib" \
-			LINK="${CXX}" LD="${CXX}"
+                        LDFLAGS="${LDFLAGS} -L${X11BASE}/lib"
 
 # XXX: SVN snapshot
 

@@ -161,7 +161,7 @@ diff -u -p lib/libm/Makefile
 +int	fedisableexcept(int mask);
 +int	fegetexcept(void);
 +
-+#endif /* _NETBSD_SOURCE || _GNU_SOURCE */
++#endif /* __BSD_VISIBLE || _GNU_SOURCE */
 +
 +__END_DECLS
 +

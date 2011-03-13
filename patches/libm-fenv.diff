@@ -131,7 +131,7 @@ diff -u -p lib/libm/Makefile
 + * POSSIBILITY OF SUCH DAMAGE.
 + */
 +
-+#if !defined(__i386__) && !defined(__amd64__) && !defined(__sparc__)
++#if !defined(__i386__) && !defined(__amd64__) && !defined(__sparc64__)
 +#error	"fenv.h is currently not supported for this architecture"
 +#endif
 +
@@ -155,7 +155,7 @@ diff -u -p lib/libm/Makefile
 +int	fesetenv(const fenv_t *);
 +int	feupdateenv(const fenv_t *);
 +
-+#if defined(_NETBSD_SOURCE) || defined(_GNU_SOURCE)
++#if defined(__BSD_VISIBLE) || defined(_GNU_SOURCE)
 +
 +int	feenableexcept(int mask);
 +int	fedisableexcept(int mask);

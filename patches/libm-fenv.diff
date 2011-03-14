@@ -43,7 +43,7 @@ RCS file: /cvs/src/lib/libm/Makefile,v
 retrieving revision 1.76
 diff -u -p lib/libm/Makefile
 --- lib/libm/Makefile	19 Jul 2010 12:48:23 -0000	1.76
-+++ lib/libm/Makefile	23 Feb 2011 02:20:57 -0000
++++ lib/libm/Makefile	14 Mar 2011 21:01:06 -0000
 @@ -27,6 +27,7 @@ ARCH_SRCS = s_copysign.S s_copysignf.S
  ARCH_SRCS = e_acos.S e_asin.S e_atan2.S e_exp.S e_fmod.S e_log.S e_log10.S \
  	    e_remainder.S e_remainderf.S e_scalb.S e_sqrt.S e_sqrtf.S \
@@ -60,16 +60,17 @@ diff -u -p lib/libm/Makefile
  	    invtrig.c \
  	    s_atan.S s_atanf.S s_ceil.S s_ceilf.S s_copysign.S s_copysignf.S \
  	    s_cos.S s_cosf.S s_floor.S s_floorf.S \
-@@ -61,6 +63,8 @@ ARCH_SRCS = e_sqrt.c e_sqrtf.c e_remainder.c e_remaind
+@@ -61,6 +63,9 @@ ARCH_SRCS = e_sqrt.c e_sqrtf.c e_remainder.c e_remaind
  .elif (${MACHINE_ARCH} == "sh")
  .PATH:	${.CURDIR}/arch/sh
  ARCH_SRCS = e_sqrt.c e_sqrtf.c s_fabsf.c
 +.elif (${MACHINE_ARCH} == "sparc64")
++.PATH:	${.CURDIR}/arch/sparc64
 +ARCH_SRCS = fenv.c
  .elif (${MACHINE_ARCH} == "vax")
  .PATH:	${.CURDIR}/arch/vax
  NOIEEE_ARCH = n_argred.S n_infnan.S n_sqrt.S
-@@ -150,6 +154,10 @@ CPPFLAGS+=	-I${.CURDIR}/src -I${.CURDIR}/src/ld128
+@@ -150,6 +155,10 @@ CPPFLAGS+=	-I${.CURDIR}/src -I${.CURDIR}/src/ld128
  SRCS+=		${LONG_SRCS}
  .endif
  .endif
@@ -80,7 +81,7 @@ diff -u -p lib/libm/Makefile
  
  # Substitute common sources with any arch specific sources 
  .for i in ${ARCH_SRCS}
-@@ -169,6 +177,19 @@ MAN+=	acos.3 acosh.3 asin.3 asinh.3 atan.3 atan2.3 ata
+@@ -169,6 +178,19 @@ MAN+=	acos.3 acosh.3 asin.3 asinh.3 atan.3 atan2.3 ata
  	logb.3 j0.3 lgamma.3 lrint.3 lround.3 math.3 nan.3 remainder.3 \
  	rint.3 round.3 sin.3 sinh.3 sqrt.3 tan.3 tanh.3 trunc.3 \
  	copysign.3 ilogb.3 nextafter.3 scalbn.3 cimag.3 conj.3 cproj.3

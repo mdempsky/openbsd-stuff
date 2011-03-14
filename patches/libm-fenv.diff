@@ -64,7 +64,7 @@ diff -u -p lib/libm/Makefile
  .elif (${MACHINE_ARCH} == "sh")
  .PATH:	${.CURDIR}/arch/sh
  ARCH_SRCS = e_sqrt.c e_sqrtf.c s_fabsf.c
-+.elif (${MARCHINE_ARCH} == "sparc64")
++.elif (${MACHINE_ARCH} == "sparc64")
 +ARCH_SRCS = fenv.c
  .elif (${MACHINE_ARCH} == "vax")
  .PATH:	${.CURDIR}/arch/vax
@@ -102,7 +102,7 @@ diff -u -p lib/libm/Makefile
  MLINKS+=exp.3 exp2.3 exp.3 expm1.3 exp.3 log.3 exp.3 log2.3 \
 --- /dev/null	Tue Feb 22 18:22:29 2011
 +++ include/fenv.h	Tue Feb 22 14:06:50 2011
-@@ -0,0 +1,63 @@
+@@ -0,0 +1,64 @@
 +/*	$OpenBSD$	*/
 +/*	$NetBSD: fenv.h,v 1.2.4.1 2011/02/08 16:18:55 bouyer Exp $	*/
 +/*
@@ -131,13 +131,14 @@ diff -u -p lib/libm/Makefile
 + * POSSIBILITY OF SUCH DAMAGE.
 + */
 +
++#ifndef _FENV_H_
++#define _FENV_H_
++
 +#if !defined(__i386__) && !defined(__amd64__) && !defined(__sparc64__)
 +#error	"fenv.h is currently not supported for this architecture"
 +#endif
 +
-+#ifndef _FENV_H_
-+#define _FENV_H_
-+
++#include <sys/cdefs.h>
 +#include <machine/fenv.h>
 +
 +__BEGIN_DECLS
@@ -155,13 +156,13 @@ diff -u -p lib/libm/Makefile
 +int	fesetenv(const fenv_t *);
 +int	feupdateenv(const fenv_t *);
 +
-+#if defined(__BSD_VISIBLE) || defined(_GNU_SOURCE)
++#if __BSD_VISIBLE || defined(_GNU_SOURCE)
 +
 +int	feenableexcept(int mask);
 +int	fedisableexcept(int mask);
 +int	fegetexcept(void);
 +
-+#endif /* __BSD_VISIBLE || _GNU_SOURCE */
++#endif /* __BSD_VISIBLE || defined(_GNU_SOURCE) */
 +
 +__END_DECLS
 +

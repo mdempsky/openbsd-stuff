@@ -27,7 +27,7 @@ WRKSRC =		${WRKDIST}/src
 
 do-configure:
 	${SUBST_CMD} ${WRKSRC}/src.pro
-	cd ${WRKSRC} && ${LOCALBASE}/bin/qmake4 src.pro
+	cd ${WRKSRC} && qmake4 src.pro
 
 do-install:
 	${INSTALL_DATA} ${WRKDIST}/lib/libopencsg.so.${LIBopencsg_VERSION} \

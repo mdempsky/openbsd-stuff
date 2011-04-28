@@ -1,6 +1,3 @@
-# Needs working fenv.h.
-ONLY_FOR_ARCHES =	amd64 i386 sparc64
-
 COMMENT =		Computational Geometry Algorithms Library
 
 V =			3.7

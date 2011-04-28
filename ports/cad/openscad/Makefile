@@ -1,6 +1,3 @@
-# Needs working fenv.h.
-ONLY_FOR_ARCHES =	amd64 i386 sparc64
-
 COMMENT =		the programmer's solid 3D CAD modeller
 
 V =			2010.05
@@ -43,7 +40,6 @@ pre-configure:
 	ln -sf ${LOCALBASE}/bin/bison ${WRKDIR}/bin/yacc
 
 do-configure:
-	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} \
-		${LOCALBASE}/bin/qmake4 openscad.pro
+	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} qmake4 openscad.pro
 
 .include <bsd.port.mk>

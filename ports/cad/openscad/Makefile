@@ -1,3 +1,5 @@
+# $OpenBSD$
+
 COMMENT =		the programmer's solid 3D CAD modeller
 
 V =			2011.04

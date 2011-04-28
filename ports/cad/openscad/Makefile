@@ -17,8 +17,9 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB =		CGAL GL GLEW GLU boost_thread-mt c gmp lib/qt4/QtGui \
-			lib/qt4/QtOpenGL m mpfr opencsg pthread stdc++
+WANTLIB =		CGAL GL GLEW GLU boost_program_options-mt \
+			boost_thread-mt c gmp lib/qt4/QtGui lib/qt4/QtOpenGL m \
+			mpfr opencsg pthread stdc++
 
 MASTER_SITES =		https://github.com/downloads/openscad/openscad/
 DISTFILES =		openscad-${V}.src.tar.gz

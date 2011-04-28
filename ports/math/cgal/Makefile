@@ -1,9 +1,15 @@
+# $OpenBSD$
+
+# vax:	no fenv.h support
+NOT_FOR_ARCHS =		vax
+
 COMMENT =		Computational Geometry Algorithms Library
 
 V =			3.8
 PKGNAME =		cgal-${V}
 DISTNAME =		CGAL-${V}
 
+SHARED_ONLY =		Yes
 SHARED_LIBS =		CGAL		0.0 \
 			CGAL_Core	0.0 \
 			CGAL_ImageIO	0.0 \

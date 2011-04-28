@@ -1,5 +1,0 @@
-@comment $OpenBSD$
-@lib lib/libCGAL.so.${LIBCGAL_VERSION}
-@lib lib/libCGAL_Core.so.${LIBCGAL_Core_VERSION}
-@lib lib/libCGAL_ImageIO.so.${LIBCGAL_ImageIO_VERSION}
-@lib lib/libCGAL_Qt4.so.${LIBCGAL_Qt4_VERSION}

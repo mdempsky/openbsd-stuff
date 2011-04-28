@@ -1,14 +1,10 @@
 @comment $OpenBSD$
-%%SHARED%%
 bin/cgal_create_cmake_script
 bin/cgal_make_macosx_app
 include/CGAL/
-include/CGAL/AABB_drawing_traits.h
 include/CGAL/AABB_intersections.h
-include/CGAL/AABB_node.h
 include/CGAL/AABB_polyhedron_segment_primitive.h
 include/CGAL/AABB_polyhedron_triangle_primitive.h
-include/CGAL/AABB_search_tree.h
 include/CGAL/AABB_segment_primitive.h
 include/CGAL/AABB_traits.h
 include/CGAL/AABB_tree.h
@@ -614,6 +610,7 @@ include/CGAL/Envelope_3/Envelope_overlay_2.h
 include/CGAL/Envelope_3/Envelope_overlay_functor.h
 include/CGAL/Envelope_3/Envelope_pm_dcel.h
 include/CGAL/Envelope_3/set_dividors.h
+include/CGAL/Envelope_diagram_1.h
 include/CGAL/Euclidean_distance.h
 include/CGAL/Euclidean_distance_sphere_point.h
 include/CGAL/Euler_integrator_2.h
@@ -640,6 +637,9 @@ include/CGAL/Filtered_kernel/Cartesian_coordinate_iterator_2.h
 include/CGAL/Filtered_kernel/Cartesian_coordinate_iterator_3.h
 include/CGAL/Filtered_kernel_fwd.h
 include/CGAL/Filtered_predicate.h
+include/CGAL/Fixed_alpha_shape_3.h
+include/CGAL/Fixed_alpha_shape_cell_base_3.h
+include/CGAL/Fixed_alpha_shape_vertex_base_3.h
 include/CGAL/Fixed_border_parameterizer_3.h
 include/CGAL/Flattening_iterator.h
 include/CGAL/Fourtuple.h
@@ -1122,12 +1122,20 @@ include/CGAL/Mesh_2/Refine_edges_with_clusters.h
 include/CGAL/Mesh_2/Refine_faces.h
 include/CGAL/Mesh_3/
 include/CGAL/Mesh_3/C3T3_helpers.h
+include/CGAL/Mesh_3/Cell_criteria_visitor_with_balls.h
 include/CGAL/Mesh_3/Creator_weighted_point_3.h
+include/CGAL/Mesh_3/Detect_features_in_polyhedra.h
+include/CGAL/Mesh_3/Detect_features_in_polyhedra_fwd.h
+include/CGAL/Mesh_3/Detect_polylines_in_polyhedra.h
+include/CGAL/Mesh_3/Detect_polylines_in_polyhedra_fwd.h
+include/CGAL/Mesh_3/Facet_criteria_visitor_with_balls.h
+include/CGAL/Mesh_3/Facet_on_same_surface_criterion.h
 include/CGAL/Mesh_3/IO.h
 include/CGAL/Mesh_3/Image_to_labeled_function_wrapper.h
 include/CGAL/Mesh_3/Implicit_surface_mesher_visitor.h
 include/CGAL/Mesh_3/Labeled_mesh_domain_3.h
 include/CGAL/Mesh_3/Lloyd_move.h
+include/CGAL/Mesh_3/Mesh_complex_3_in_triangulation_3_base.h
 include/CGAL/Mesh_3/Mesh_global_optimizer.h
 include/CGAL/Mesh_3/Mesh_sizing_field.h
 include/CGAL/Mesh_3/Mesh_surface_cell_base_3.h
@@ -1137,6 +1145,8 @@ include/CGAL/Mesh_3/Null_global_optimizer_visitor.h
 include/CGAL/Mesh_3/Null_perturber_visitor.h
 include/CGAL/Mesh_3/Odt_move.h
 include/CGAL/Mesh_3/Poisson_refine_cells_3.h
+include/CGAL/Mesh_3/Polyline_with_context.h
+include/CGAL/Mesh_3/Protect_edges_sizing_field.h
 include/CGAL/Mesh_3/Refine_cells_3.h
 include/CGAL/Mesh_3/Refine_facets_3.h
 include/CGAL/Mesh_3/Refine_tets_visitor.h
@@ -1161,13 +1171,19 @@ include/CGAL/Mesh_3/parameters_defaults.h
 include/CGAL/Mesh_3/polyhedral_to_labeled_function_wrapper.h
 include/CGAL/Mesh_3/radius_ratio.h
 include/CGAL/Mesh_3/sliver_criteria.h
+include/CGAL/Mesh_3/utilities.h
 include/CGAL/Mesh_3/vertex_perturbation.h
 include/CGAL/Mesh_cell_base_3.h
 include/CGAL/Mesh_cell_criteria_3.h
 include/CGAL/Mesh_complex_3_in_triangulation_3.h
+include/CGAL/Mesh_constant_domain_field_3.h
 include/CGAL/Mesh_criteria_3.h
+include/CGAL/Mesh_domain_with_polyline_features_3.h
+include/CGAL/Mesh_edge_criteria_3.h
 include/CGAL/Mesh_facet_criteria_3.h
+include/CGAL/Mesh_facet_topology.h
 include/CGAL/Mesh_optimization_return_code.h
+include/CGAL/Mesh_polyhedron_3.h
 include/CGAL/Mesh_triangulation_3.h
 include/CGAL/Mesh_vertex_base_3.h
 include/CGAL/Mesher_level.h
@@ -1206,6 +1222,9 @@ include/CGAL/Min_sphere_d/
 include/CGAL/Min_sphere_d.h
 include/CGAL/Min_sphere_d/Min_sphere_d_impl.h
 include/CGAL/Min_sphere_d/Optimisation_sphere_d.h
+include/CGAL/Min_sphere_of_points_d_traits_2.h
+include/CGAL/Min_sphere_of_points_d_traits_3.h
+include/CGAL/Min_sphere_of_points_d_traits_d.h
 include/CGAL/Min_sphere_of_spheres_d/
 include/CGAL/Min_sphere_of_spheres_d.h
 include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_configure.h
@@ -1480,6 +1499,7 @@ include/CGAL/Polygon_traits_2.h
 include/CGAL/Polygon_with_holes_2.h
 include/CGAL/PolyhedralSurf_neighbors.h
 include/CGAL/Polyhedral_mesh_domain_3.h
+include/CGAL/Polyhedral_mesh_domain_with_features_3.h
 include/CGAL/Polyhedron_3.h
 include/CGAL/Polyhedron_copy_3.h
 include/CGAL/Polyhedron_decorator_3.h
@@ -1644,6 +1664,9 @@ include/CGAL/Polytope_distance_d_traits_3.h
 include/CGAL/Polytope_distance_d_traits_d.h
 include/CGAL/Profile_counter.h
 include/CGAL/Profile_timer.h
+include/CGAL/Projection_traits_xy_3.h
+include/CGAL/Projection_traits_xz_3.h
+include/CGAL/Projection_traits_yz_3.h
 include/CGAL/QP_functions.h
 include/CGAL/QP_models.h
 include/CGAL/QP_options.h
@@ -1673,6 +1696,8 @@ include/CGAL/QP_solver/basic.h
 include/CGAL/QP_solver/debug.h
 include/CGAL/QP_solver/functors.h
 include/CGAL/Qt/
+include/CGAL/Qt/AlphaShapeGraphicsItem.h
+include/CGAL/Qt/ApolloniusGraphGraphicsItem.h
 include/CGAL/Qt/CircularArcGraphicsItem.h
 include/CGAL/Qt/ConstrainedTriangulationGraphicsItem.h
 include/CGAL/Qt/Converter.h
@@ -1690,12 +1715,17 @@ include/CGAL/Qt/GraphicsViewPolylineInput.h
 include/CGAL/Qt/LineGraphicsItem.h
 include/CGAL/Qt/PainterOstream.h
 include/CGAL/Qt/PointsGraphicsItem.h
+include/CGAL/Qt/PointsInKdTreeGraphicsItem.h
 include/CGAL/Qt/PolygonGraphicsItem.h
 include/CGAL/Qt/PolygonWithHolesGraphicsItem.h
+include/CGAL/Qt/PolylinesGraphicsItem.h
 include/CGAL/Qt/PowerdiagramGraphicsItem.h
+include/CGAL/Qt/RegularGridGraphicsItem.h
+include/CGAL/Qt/RegularGridVectorFieldGraphicsItem.h
 include/CGAL/Qt/RegularTriangulationGraphicsItem.h
 include/CGAL/Qt/SegmentDelaunayGraphGraphicsItem.h
 include/CGAL/Qt/SegmentsGraphicsItem.h
+include/CGAL/Qt/StreamLinesGraphicsItem.h
 include/CGAL/Qt/TriangulationGraphicsItem.h
 include/CGAL/Qt/VoronoiGraphicsItem.h
 include/CGAL/Qt/debug.h
@@ -2035,6 +2065,7 @@ include/CGAL/Triangle_3_Ray_3_do_intersect.h
 include/CGAL/Triangle_3_Segment_3_do_intersect.h
 include/CGAL/Triangle_3_Tetrahedron_3_do_intersect.h
 include/CGAL/Triangle_3_Triangle_3_do_intersect.h
+include/CGAL/Triangle_3_Triangle_3_intersection.h
 include/CGAL/Triangle_accessor_3.h
 include/CGAL/Triangular_field_2.h
 include/CGAL/Triangulated_mixed_complex_observer_3.h
@@ -2074,6 +2105,7 @@ include/CGAL/Triangulation_incremental_builder_3.h
 include/CGAL/Triangulation_iterator_adaptator.h
 include/CGAL/Triangulation_line_face_circulator_2.h
 include/CGAL/Triangulation_simplex_3.h
+include/CGAL/Triangulation_structural_filtering_traits.h
 include/CGAL/Triangulation_utils_2.h
 include/CGAL/Triangulation_utils_3.h
 include/CGAL/Triangulation_vertex_base_2.h
@@ -2266,26 +2298,30 @@ include/CGAL/hilbert_sort.h
 include/CGAL/in_place_edge_list.h
 include/CGAL/int.h
 include/CGAL/internal/
-include/CGAL/internal/AABB_Intersections_3/
-include/CGAL/internal/AABB_Intersections_3/Bbox_3_Plane_3_do_intersect.h
-include/CGAL/internal/AABB_Intersections_3/Bbox_3_Sphere_3_do_intersect.h
-include/CGAL/internal/AABB_Intersections_3/Bbox_3_Triangle_3_do_intersect.h
-include/CGAL/internal/AABB_Intersections_3/Triangle_3_Plane_3_intersection.h
 include/CGAL/internal/AABB_tree/
+include/CGAL/internal/AABB_tree/AABB_drawing_traits.h
+include/CGAL/internal/AABB_tree/AABB_node.h
+include/CGAL/internal/AABB_tree/AABB_search_tree.h
+include/CGAL/internal/AABB_tree/AABB_traversal_traits.h
 include/CGAL/internal/AABB_tree/nearest_point_segment_3.h
 include/CGAL/internal/AABB_tree/nearest_point_triangle_3.h
+include/CGAL/internal/Classification_type.h
 include/CGAL/internal/Delaunay_triangulation_hierarchy_3.h
 include/CGAL/internal/Dummy_tds_3.h
 include/CGAL/internal/Exact_type_selector.h
 include/CGAL/internal/Intersections_3/
 include/CGAL/internal/Intersections_3/Bbox_3_Bbox_3_do_intersect.h
 include/CGAL/internal/Intersections_3/Bbox_3_Line_3_do_intersect.h
+include/CGAL/internal/Intersections_3/Bbox_3_Plane_3_do_intersect.h
 include/CGAL/internal/Intersections_3/Bbox_3_Ray_3_do_intersect.h
 include/CGAL/internal/Intersections_3/Bbox_3_Segment_3_do_intersect.h
+include/CGAL/internal/Intersections_3/Bbox_3_Sphere_3_do_intersect.h
+include/CGAL/internal/Intersections_3/Bbox_3_Triangle_3_do_intersect.h
 include/CGAL/internal/Intersections_3/Triangle_3_Line_3_intersection.h
 include/CGAL/internal/Intersections_3/Triangle_3_Ray_3_intersection.h
 include/CGAL/internal/Intersections_3/Triangle_3_Segment_3_intersection.h
 include/CGAL/internal/K_neighbor_search.h
+include/CGAL/internal/Projection_traits_3.h
 include/CGAL/internal/Regular_triangulation_filtered_traits_3.h
 include/CGAL/internal/Static_filters/
 include/CGAL/internal/Static_filters/Compare_squared_radius_3.h
@@ -2306,10 +2342,10 @@ include/CGAL/internal/Static_filters/Static_filters.h
 include/CGAL/internal/Static_filters/tools.h
 include/CGAL/internal/Triangulation_ds_circulators_3.h
 include/CGAL/internal/Triangulation_ds_iterators_3.h
-include/CGAL/internal/Triangulation_euclidean_traits_projected_3.h
 include/CGAL/internal/bounded_priority_queue.h
 include/CGAL/internal/container_fwd_fixed.hpp
 include/CGAL/internal/gcc_cpp0x.h
+include/CGAL/internal/spatial_sorting_traits_with_indices.h
 include/CGAL/interpolation_functions.h
 include/CGAL/intersection_2.h
 include/CGAL/intersection_2_1.h
@@ -2320,6 +2356,7 @@ include/CGAL/intersection_3_1.h
 include/CGAL/intersections.h
 include/CGAL/intersections_d.h
 include/CGAL/ipower.h
+include/CGAL/is_iterator.h
 include/CGAL/is_y_monotone_2.h
 include/CGAL/iterator.h
 include/CGAL/jet_estimate_normals.h
@@ -2527,13 +2564,17 @@ lib/CGAL/Qt3Macros-patched.cmake
 lib/CGAL/UseCGAL.cmake
 lib/CGAL/UseESBTL.cmake
 lib/CGAL/test_MPFI.cpp
-share/doc/CGAL-3.7/
-share/doc/CGAL-3.7/AUTHORS
-share/doc/CGAL-3.7/CHANGES
-share/doc/CGAL-3.7/LICENSE
-share/doc/CGAL-3.7/LICENSE.FREE_USE
-share/doc/CGAL-3.7/LICENSE.LGPL
-share/doc/CGAL-3.7/LICENSE.QPL
+@lib lib/libCGAL.so.${LIBCGAL_VERSION}
+@lib lib/libCGAL_Core.so.${LIBCGAL_Core_VERSION}
+@lib lib/libCGAL_ImageIO.so.${LIBCGAL_ImageIO_VERSION}
+@lib lib/libCGAL_Qt4.so.${LIBCGAL_Qt4_VERSION}
+share/doc/CGAL-3.8/
+share/doc/CGAL-3.8/AUTHORS
+share/doc/CGAL-3.8/CHANGES
+share/doc/CGAL-3.8/LICENSE
+share/doc/CGAL-3.8/LICENSE.FREE_USE
+share/doc/CGAL-3.8/LICENSE.LGPL
+share/doc/CGAL-3.8/LICENSE.QPL
 share/man/
 share/man/man1/
 @man share/man/man1/cgal_create_cmake_script.1

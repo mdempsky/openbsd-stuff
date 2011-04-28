@@ -1,9 +1,11 @@
 COMMENT =		the programmer's solid 3D CAD modeller
 
-V =			2010.05
+V =			2011.04
 DISTNAME =		openscad-${V}
 
 CATEGORIES =		cad
+
+VMEM_WARNING =		Yes
 
 HOMEPAGE =		http://www.openscad.org/
 

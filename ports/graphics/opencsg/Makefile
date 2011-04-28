@@ -1,3 +1,5 @@
+# $OpenBSD$
+
 COMMENT =		Constructive Solid Geometry rendering library
 
 V =			1.3.1

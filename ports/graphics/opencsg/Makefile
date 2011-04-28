@@ -19,10 +19,10 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB =		GL GLU lib/qt4/QtGui m stdc++
+WANTLIB =		GL GLEW GLU lib/qt4/QtGui m stdc++
 
 MODULES =		x11/qt4
-BUILD_DEPENDS =		graphics/glew
+LIB_DEPENDS =		graphics/glew
 
 MASTER_SITES =		http://www.opencsg.org/
 

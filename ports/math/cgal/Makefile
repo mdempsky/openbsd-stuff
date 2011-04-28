@@ -1,6 +1,6 @@
 COMMENT =		Computational Geometry Algorithms Library
 
-V =			3.7
+V =			3.8
 PKGNAME =		cgal-${V}
 DISTNAME =		CGAL-${V}
 
@@ -23,7 +23,7 @@ WANTLIB =		GL GLU ICE SM X11 Xext boost_thread-mt gmp gmpxx \
 			lib/qt4/QtGui lib/qt4/QtOpenGL m mpfr stdc++ z
 
 # Awkward hosting site; see https://gforge.inria.fr/frs/?group_id=52 for files index.
-MASTER_SITES =		https://gforge.inria.fr/frs/download.php/27641/
+MASTER_SITES =		https://gforge.inria.fr/frs/download.php/28500/
 
 MODULES =		devel/cmake \
 			x11/qt4

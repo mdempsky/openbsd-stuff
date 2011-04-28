@@ -1,6 +1,5 @@
 @comment $OpenBSD$
 bin/cgal_create_cmake_script
-bin/cgal_make_macosx_app
 include/CGAL/
 include/CGAL/AABB_intersections.h
 include/CGAL/AABB_polyhedron_segment_primitive.h

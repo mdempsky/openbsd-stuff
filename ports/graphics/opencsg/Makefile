@@ -4,6 +4,7 @@ V =			1.3.1
 DISTNAME =		OpenCSG-${V}
 PKGNAME =		opencsg-${V}
 
+SHARED_ONLY =		Yes
 SHARED_LIBS =		opencsg		0.0
 
 CATEGORIES =		graphics

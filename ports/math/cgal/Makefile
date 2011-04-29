@@ -41,4 +41,7 @@ CONFIGURE_ENV =         CFLAGS="${CFLAGS} -I${X11BASE}/include" \
                         CXXFLAGS="${CXXFLAGS} -I${X11BASE}/include" \
                         LDFLAGS="${LDFLAGS} -L${X11BASE}/lib"
 
+post-patch:
+	rm ${WRKSRC}/scripts/cgal_make_macosx_app
+
 .include <bsd.port.mk>

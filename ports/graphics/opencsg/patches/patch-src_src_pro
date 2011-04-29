@@ -1,3 +1,4 @@
+$OpenBSD$
 --- src/src.pro.orig	Wed Jun  9 12:39:58 2010
 +++ src/src.pro	Thu Apr 28 16:03:35 2011
 @@ -1,10 +1,11 @@

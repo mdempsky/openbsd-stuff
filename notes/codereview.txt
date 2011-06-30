@@ -1,0 +1,55 @@
+** Local CVS mirror
+
+First, you will probably want a local CVS mirror.  This isn't
+necessary, but it significantly speeds up a lot of CVS operations,
+which makes using Rietveld much more pleasant. 
+
+There are docs on the OpenBSD website that explain how to use cvsync
+to setup and maintain one at http://www.openbsd.org/cvsync.html.
+
+
+** Setting up Rietveld
+
+Next, you'll want to setup the Rietveld upload.py tool.  The general
+documentation for this is available at
+http://code.google.com/p/rietveld/wiki/CodeReviewHelp, but below are
+some OpenBSD specific pointers.
+
+First, download the upload.py tool from
+http://codereview.appspot.com/static/upload.py.  (This tool is
+periodically updated, so be sure to check for updates once in a
+while.)  This is a Python script that expects to run using simply
+"python", which doesn't normally exist on an OpenBSD system.  The
+easiest fix is to change the first line to
+"#!/usr/local/bin/python2.7" (or whatever version you install).
+
+To upload to Rietveld, you'll also need a Google account (e.g., a
+Gmail account).  You can sign up for one at
+http://mail.google.com/mail/signup.
+
+
+** Uploading a diff
+
+To upload a new diff, run:
+
+  $ cd /usr/src
+  $ export CVSROOT=/path/to/cvsmirror
+  $ upload.py --vcs=cvs -y path/to/file1 path/to/file2 ...
+
+(If your change only affects files within a specific subdirectory, you
+can cd to that directory (e.g., /usr/src/sys) instead of /usr/src.
+However, beware that if you end up including more files in your diff
+and have to change the base directory, Rietveld won't know the patches
+refer to the same files.)
+
+This will prompt you to give a short description of your patch set and
+then will upload your diff to codereview.appspot.com.
+
+Additionally, upload.py has a lot of extra command line arguments to
+use.  Some of the more interesting ones are --reviewers, --send_mail,
+--issue, and --private.
+
+E.g., to include me as a reviewer and send me an email notification
+about your new issue, you can run:
+
+    $ upload.py -r matthew@dempsky.org --send_mail ...

@@ -30,17 +30,29 @@ http://mail.google.com/mail/signup.
 
 ** Uploading a diff
 
-To upload a new diff, run:
+To upload a new diff, first change to the base directory and set your
+CVSROOT environment variable appropriately if you haven't already:
 
   $ cd /usr/src
   $ export CVSROOT=/path/to/cvsmirror
+
+If your change only affects files within a specific subdirectory, you
+can cd to that directory (e.g., /usr/src/sys) instead of /usr/src.
+However, beware that if you later end up including more files in your
+diff and have to change the base directory, Rietveld won't know the
+patches refer to the same files.
+
+Next, double check the diff one last time before uploading it:
+
+  $ cvs diff -up path/to/file1 path/to/file2 ... | less
+
+Finally, you can use upload.py to actually upload the diff:
+
   $ upload.py --vcs=cvs -y path/to/file1 path/to/file2 ...
 
-(If your change only affects files within a specific subdirectory, you
-can cd to that directory (e.g., /usr/src/sys) instead of /usr/src.
-However, beware that if you end up including more files in your diff
-and have to change the base directory, Rietveld won't know the patches
-refer to the same files.)
+(The --vcs=cvs option tells upload.py to not bother autoguessing what
+version control tool you're using, and -y tells it to skip trying to
+diff the entire checkout for some reason...)
 
 This will prompt you to give a short description of your patch set and
 then will upload your diff to codereview.appspot.com.
@@ -52,4 +64,9 @@ use.  Some of the more interesting ones are --reviewers, --send_mail,
 E.g., to include me as a reviewer and send me an email notification
 about your new issue, you can run:
 
-    $ upload.py -r matthew@dempsky.org --send_mail ...
+    $ upload.py -r matthew@dempsky.org --send_mail --vcs=cvs -y ...
+
+If you later want to update an existing issue after getting some
+feedback, you can run (replacing NNN as appropriate):
+
+    $ upload.py -i NNN --send_mail --vcs=cvs -y ...
